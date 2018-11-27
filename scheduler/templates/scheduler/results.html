@@ -1,0 +1,14 @@
+{% extends "base_generic.html" %} 
+
+{% block content %}
+<h1>{{ event.name }}</h1>
+
+<ul>
+	{% for date in event.instance_set.all %}
+		<li>{{ date.date }} -- {{ date.votes }} vote{{ date.votes|pluralize }}</li>
+	{% endfor %}
+</ul>
+
+<a href="{% url 'scheduler:index' %}">Home</a>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>{{ event.name }}</h1>
+
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'scheduler:vote' event.id %}" method="post">
+	{% csrf_token %}
+	{% for date in event.eventinstance_set.all %}
+		<input type="radio" name="date" id="date{{ forloop.counter }}" value="{{ date.id }}">
+		<label for="date{{ forloop.counter }}"></label>
+		<br>
+	{% endfor %} 
+	<input type="submit" value="Vote"> 
+</form>
+
+{% endblock %}
