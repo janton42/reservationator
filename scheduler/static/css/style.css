@@ -70,8 +70,12 @@ footer a {
   text-decoration: none;
 }
 
-h1, .center {
+h1, h3, .center {
 	text-align: center;
+}
+
+p {
+  text-align: center;
 }
 
 .jumbotron {

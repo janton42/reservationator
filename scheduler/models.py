@@ -10,22 +10,23 @@ from phone_field import PhoneField
 from localflavor.us.models import USStateField
 
 
-# class Profile(models.Model):
-# 	user = models.OneToOneField(User, on_delete=models.CASCADE)
-# 	phone = PhoneField(blank=True)
+class Profile(models.Model):
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	phone = PhoneField(blank=True)
 
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-# 	if created:
-# 		Profile.objects.create(user=instance)
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+	if created:
+		Profile.objects.create(user=instance)
 
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-# 	instance.profile.save()
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+	instance.profile.save()
 
 class Event(models.Model):
 	host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	name = models.CharField(max_length=400, help_text='Enter a name for your event')
+	place = models.ForeignKey('Place', on_delete=models.CASCADE, null=True)
 
 	class Meta:
 		ordering = ['name']
@@ -35,8 +36,7 @@ class Event(models.Model):
 
 class EventInstance(models.Model):
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
-	date = models.DateTimeField('time and date')
-	place = models.ForeignKey('Place', on_delete=models.CASCADE)
+	date = models.DateTimeField('time and date', null=True)
 	votes = models.IntegerField(default=0)
 
 	class Meta:
