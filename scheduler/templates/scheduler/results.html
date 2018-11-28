@@ -8,4 +8,5 @@
 	{% for instance in event.eventinstance_set.all %}
 		<p>{{ instance.date }} -- {{ instance.votes }} vote{{ date.votes|pluralize }}</p>
 	{% endfor %}
+
 {% endblock %}
