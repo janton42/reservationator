@@ -9,3 +9,7 @@ urlpatterns = [
 	path('<int:pk>/details/', views.DetailsView.as_view(), name='details'),
 	path('<int:event_id>/vote/', views.vote, name='vote'),
 ]
+
+urlpatterns += [
+    path('accounts/', include('django.contrib.auth.urls')),
+]

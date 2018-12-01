@@ -11,11 +11,6 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-	
-# def index(request):
-
-
-# 	return render(request, 'index.html')
 
 class IndexView(generic.ListView):
 	template_name = 'scheduler/index.html'
@@ -48,3 +43,22 @@ def vote(request, event_id):
 		selected_choice.votes += 1
 		selected_choice.save()
 		return HttpResponseRedirect(reverse('scheduler:details', args=(event_id,)))
+
+def signup(request):
+    if request.method == 'GET':
+        form = UserCreationForm()
+        return render(request, 'signup.html', {'form': form})
+    elif request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user.set_password(password)
+            user.save()
+            login(request, user)
+            return redirect('index')
+
+        else:
+            form = UserCreationForm(request.POST)
+            return render(request, 'signup.html', {'form': form})
