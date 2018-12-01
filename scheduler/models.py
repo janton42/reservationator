@@ -34,7 +34,7 @@ class Event(models.Model):
 	def __str__(self):
 		return f'{self.name}'
 
-class EventInstance(models.Model):
+class Choice(models.Model):
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
 	date = models.DateTimeField('time and date', null=True)
 	votes = models.IntegerField(default=0)

@@ -5,7 +5,7 @@
 		<p>Here are your events:</p>
 			{% for event in event_list %}
 				<div class="center">
-					<a href="{% url 'scheduler:results' event.id %}">{{ event.name }}</a>
+					<a href="{% url 'scheduler:vote' event.id %}">{{ event.name }}</a>
 				</div>
 				<br>
 			{% endfor %}

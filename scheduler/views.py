@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from scheduler.models import Event, EventInstance, Place
+from scheduler.models import Event, Choice, Place
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -24,27 +24,27 @@ class IndexView(generic.ListView):
 	def get_queryset(self):
 		return Event.objects.all().order_by('name')
 
-class InstanceView(generic.DetailView):
-	model = EventInstance
+class ChoiceView(generic.DetailView):
+	model = Choice
 	template_name = 'scheduler/date.html'
 
 	def get_queryset(self):
-		return EventInstance.objects.all()
+		return Choice.objects.all()
 
-class ResultsView(generic.DetailView):
+class DetailsView(generic.DetailView):
 	model = Event
-	template_name = 'scheduler/results.html'
+	template_name = 'scheduler/details.html'
 
 def vote(request, event_id):
 	event = get_object_or_404(Event, pk=event_id)
 	try:
-		selected_date = event.instance_set.get(pk=request.POST['eventinstance'])
-	except (KeyError, EventInstance.DoesNotExist):
+		selected_choice = event.choice_set.get(pk=request.POST['choice'])
+	except (KeyError, Choice.DoesNotExist):
 		return render(request, 'scheduler/date.html', {
 			'event': event,
-			'error_message': "You didn't vote.",
-			})
+			'error_message': "Please choose at least one date.",
+		})
 	else:
-		selected_date.votes += 1
-		selected_date.save()
-		return HttpResponseRedirect(reverse('scheduler:results', args=(event_id)))
+		selected_choice.votes += 1
+		selected_choice.save()
+		return HttpResponseRedirect(reverse('scheduler:details', args=(event_id,)))

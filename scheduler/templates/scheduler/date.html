@@ -9,9 +9,9 @@
 
 <form action="{% url 'scheduler:vote' event.id %}" method="post">
 	{% csrf_token %}
-	{% for date in event.eventinstance_set.all %}
-		<input type="radio" name="date" id="date{{ forloop.counter }}" value="{{ date.id }}">
-		<label for="date{{ forloop.counter }}"></label>
+	{% for choice in event.choice_set.all %}
+		<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"> {{ choice.date }}
+		<label for="choice{{ forloop.counter }}"> @ {{ event.place }}</label>
 		<br>
 	{% endfor %} 
 	<input type="submit" value="Vote"> 

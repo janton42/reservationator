@@ -5,8 +5,8 @@
 <p> - @ - </p>
 <h3>{{ event.place }}</h3>
 
-	{% for instance in event.eventinstance_set.all %}
-		<p>{{ instance.date }} -- {{ instance.votes }} vote{{ date.votes|pluralize }}</p>
+	{% for choice in event.choice_set.all %}
+		<p>{{ choice.date }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
 	{% endfor %}
 
 {% endblock %}
