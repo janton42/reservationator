@@ -25,6 +25,12 @@
 <footer>
 	<div class="center">
 		<a href="{% url 'scheduler:index' %}">Home</a>
+		{% if user.is_authenticated %}
+            <p>User: {{ user.get_username }}</p>
+            <a href="{% url 'logout'%}?next={{request.path}}">Logout</a> 
+          {% else %}
+            <a href="{% url 'login'%}?next={{request.path}}">Login</a>   
+          {% endif %}
 	</div>
 </footer>
 

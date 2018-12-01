@@ -33,3 +33,8 @@ urlpatterns = [
 urlpatterns += [
 	path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+urlpatterns += [
+    url('accounts/', core_views.signup, name='signup'),
+]
+
