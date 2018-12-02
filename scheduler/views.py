@@ -54,10 +54,12 @@ def signup(request):
             user = form.save(commit=False)
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
             user.set_password(password)
             user.save()
             login(request, user)
-            return redirect('index')
+            return redirect('scheduler:index')
 
         else:
             form = UserCreationForm(request.POST)
