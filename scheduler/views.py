@@ -12,21 +12,22 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
-class IndexView(generic.ListView):
+class IndexView(generic.ListView,LoginRequiredMixin):
 	template_name = 'scheduler/index.html'
 	context_object_name = 'event_list'
 
-	def get_queryset(self):
-		return Event.objects.all().order_by('name')
 
-class ChoiceView(generic.DetailView):
+	def get_queryset(self):
+		return Event.objects.filter(host=self.request.user)
+
+class ChoiceView(generic.DetailView,LoginRequiredMixin):
 	model = Choice
 	template_name = 'scheduler/date.html'
 
 	def get_queryset(self):
 		return Choice.objects.all()
 
-class DetailsView(generic.DetailView):
+class DetailsView(generic.DetailView,LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/details.html'
 
