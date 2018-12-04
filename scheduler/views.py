@@ -62,4 +62,3 @@ def signup(request):
         else:
             form = UserCreationForm(request.POST)
             return render(request, 'signup.html', {'form': form})
-
