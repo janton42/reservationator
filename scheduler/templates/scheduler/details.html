@@ -5,8 +5,6 @@
 <p> - @ - </p>
 <h3>{{ event.place }}</h3>
 
-<a href="{% url 'scheduler:date' event.id %}">Vote!</a>
-
 	{% for choice in event.choice_set.all %}
 		<p>{{ choice.date }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
 	{% endfor %}
