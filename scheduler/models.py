@@ -51,6 +51,48 @@ class Place(models.Model):
 	city = models.CharField(max_length=150, blank=False)
 	state = USStateField()
 	zipcode = models.CharField(max_length=5)
+
+	CUISINE = (
+		('1', 'American'),
+		('2', 'Italian'),
+		('3', 'Steakhouse'),
+		('4', 'Seafood'),
+		('5', 'French'),
+		('6', 'Indian'),
+		('7', 'Mexican'),
+		('8', 'Japanese'),
+		('9', 'British'),
+		('10', 'Chinese'),
+		('11', 'Spanish'),
+		('12', 'Fusion/Eclectic'),
+		('13', 'Barbecue'),
+		('14', 'Greek'),
+		('15', 'Tapas/Small Plates'),
+		('16', 'Comfort Food'),
+		('17', 'Burgers'),
+		('18', 'Vegiterian/Vegan'),
+		('19', 'Fish'),
+		('20', 'Dessert'),
+		('21', 'Burmese'),
+		('22', 'Asian'),
+		('23', 'Bar/Lounge/Bottle Service'),
+		('24', 'Beer Garden'),
+		('25', 'Bistro'),
+		('26', 'Cajun'),
+		('27', 'Californian'),
+		('28', 'Cocktail Bar'),
+		('29', 'Creole'),
+		('30', 'Gastro Pub'),
+		('31', 'Global/International'),
+		('32', 'Latin/Spanish'),
+		('33', 'Latin American'),
+		('34', 'Mediterranean'),
+		('35', 'Peruvian'),
+		('36', 'Southwest'),
+		('37', 'Tex-Mex'),
+		('38', 'Wine Bar'),
+		('39', 'Farm-to-Table'),
+		)
 	PRICE = (
 		('1', '$'),
 		('2', '$$'),
@@ -59,6 +101,7 @@ class Place(models.Model):
 		)
 
 	price_quartile = models.CharField(max_length=1, choices=PRICE, blank=False)
+	cuisine = models.CharField(max_length=2, choices=CUISINE, blank=False)
 
 	class Meta:
 		ordering = ['name']
