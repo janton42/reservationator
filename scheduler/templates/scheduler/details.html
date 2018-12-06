@@ -4,6 +4,8 @@
 <h1>{{ event.name }}</h1>
 <p> - @ - </p>
 <h3>{{ event.place }}</h3>
+<h4>The finest {{ event.place.cuisine }} restaurant in all the land.</h4>
+<p>{{ event.place.price_quartile }}</p>
 
 	{% for choice in event.choice_set.all %}
 		<p>{{ choice.date }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
