@@ -12,24 +12,11 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
-class IndexView(generic.ListView,LoginRequiredMixin):
+def index(request):
 	template_name = 'scheduler/index.html'
 	context_object_name = 'event_list'
 
-
-	def get_queryset(self):
-		return Event.objects.filter(host=self.request.user)
-
-class ChoiceView(generic.DetailView,LoginRequiredMixin):
-	model = Choice
-	template_name = 'scheduler/date.html'
-
-	def get_queryset(self):
-		return Choice.objects.all()
-
-class DetailsView(generic.DetailView,LoginRequiredMixin):
-	model = Event
-	template_name = 'scheduler/details.html'
+	return render(request, 'scheduler/index.html')
 
 def vote(request, event_id):
 	event = get_object_or_404(Event, pk=event_id)
@@ -63,3 +50,22 @@ def signup(request):
         else:
             form = UserCreationForm(request.POST)
             return render(request, 'signup.html', {'form': form})
+
+def create(request):
+	# placeholder for create function
+
+	return render(request, 'scheduler/create.html')
+
+
+class ChoiceView(generic.DetailView,LoginRequiredMixin):
+	model = Choice
+	template_name = 'scheduler/date.html'
+
+	def get_queryset(self):
+		return Choice.objects.all()
+
+class DetailsView(generic.DetailView,LoginRequiredMixin):
+	model = Event
+	template_name = 'scheduler/details.html'
+
+
