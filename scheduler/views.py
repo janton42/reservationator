@@ -13,8 +13,6 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
-	template_name = 'scheduler/index.html'
-	context_object_name = 'event_list'
 
 	return render(request, 'scheduler/index.html')
 
@@ -56,6 +54,12 @@ def create(request):
 
 	return render(request, 'scheduler/create.html')
 
+class EventsListView(generic.ListView, LoginRequiredMixin):
+	model = Event
+	template_name = 'scheduler/events.html'
+
+	def get_queryset(self):
+		return Event.objects.filter(host=self.request.user)
 
 class ChoiceView(generic.DetailView,LoginRequiredMixin):
 	model = Choice
