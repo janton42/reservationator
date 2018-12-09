@@ -7,12 +7,16 @@
 					<a href="{% url 'scheduler:details' event.id %}">{{ event.name }}
 				</div>
 			<br>
-			Want to <a href="{% url 'scheduler:event_create' %}">schedule another one?</a></p>
 			{% endfor %}
+			<div class="center">
+				Want to <a href="{% url 'scheduler:event_create' %}">schedule another one?</a>
+			</div>
 	{% else %}
 		<p>You have no events. 
 			<br>
 			<br>
-			Want to <a href="{% url 'scheduler:event_create' %}">schedule one?</a></p>
+			<div class="center">
+				Want to <a href="{% url 'scheduler:event_create' %}">schedule one?</a>
+			</div>
 	{% endif %}
 {% endblock %}
