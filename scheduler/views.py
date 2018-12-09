@@ -49,11 +49,12 @@ def signup(request):
             form = UserCreationForm(request.POST)
             return render(request, 'signup.html', {'form': form})
 
+class EventCreate(PermissionRequiredMixin, CreateView):
+	model = Event
+	fields = '__all__'
+	permission_required = 'scheduler.can_add_event'
+	success_url = '/scheduler/events'
 
-def create(request):
-	# placeholder for create function
-
-	return render(request, 'scheduler/create.html')
 
 class EventsListView(generic.ListView, LoginRequiredMixin):
 	model = Event
