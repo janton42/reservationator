@@ -93,6 +93,7 @@ class Place(models.Model):
 		('38', 'Wine Bar'),
 		('39', 'Farm-to-Table'),
 		)
+	
 	PRICE = (
 		('1', '$'),
 		('2', '$$'),
@@ -100,7 +101,7 @@ class Place(models.Model):
 		('4', '$$$$'),
 		)
 
-	price_quartile = models.CharField(max_length=1, choices=PRICE, blank=False)
+	pricequartile = models.CharField(max_length=1, choices=PRICE, blank=False)
 	cuisine = models.CharField(max_length=2, choices=CUISINE, blank=False)
 
 	class Meta:

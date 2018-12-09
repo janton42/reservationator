@@ -49,6 +49,7 @@ def signup(request):
             form = UserCreationForm(request.POST)
             return render(request, 'signup.html', {'form': form})
 
+
 def create(request):
 	# placeholder for create function
 
@@ -71,5 +72,4 @@ class ChoiceView(generic.DetailView,LoginRequiredMixin):
 class DetailsView(generic.DetailView,LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/details.html'
-
 
