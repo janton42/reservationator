@@ -4,7 +4,9 @@
 		<p>Here are your events:</p>
 			{% for event in event_list %}
 				<div class="center">
-					<a href="{% url 'scheduler:details' event.id %}">{{ event.name }}
+					<a href="{% url 'scheduler:details' event.id %}">{{ event.name }}</a>
+					<br>
+					<a href="{% url 'scheduler:event_delete' event.id %}">Delete Event</a>
 				</div>
 			<br>
 			{% endfor %}
