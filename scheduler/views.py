@@ -61,6 +61,10 @@ class EventsListView(generic.ListView, LoginRequiredMixin):
 	def get_queryset(self):
 		return Event.objects.filter(host=self.request.user)
 
+class EventDelete(LoginRequiredMixin, DeleteView):
+	model = Event
+	success_url = '/scheduler/events'
+
 class ChoiceView(generic.DetailView,LoginRequiredMixin):
 	model = Choice
 	template_name = 'scheduler/date.html'
