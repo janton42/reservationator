@@ -4,7 +4,9 @@
 <h1>{{ event.name }}</h1>
 <p> - @ - </p>
 <h3>{{ event.place }}</h3>
-<h4>The finest {{ event.place.get_cuisine_display }} restaurant in all the land.</h4>
+<div class="center">
+	<h4>The finest {{ event.place.get_cuisine_display }} restaurant in all the land.</h4>
+</div>
 <p>{{ event.place.get_pricequartile_display }}</p>
 
 	{% if event.choice_set %}
