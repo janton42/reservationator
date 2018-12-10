@@ -7,8 +7,12 @@
 <h4>The finest {{ event.place.get_cuisine_display }} restaurant in all the land.</h4>
 <p>{{ event.place.get_pricequartile_display }}</p>
 
-	{% for choice in event.choice_set.all %}
-		<p>{{ choice.date }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
-	{% endfor %}
-
+	{% if event.choice_set %}
+		{% for choice in event.choice_set.all %}
+			<p>{{ choice.date }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
+		{% endfor %}
+	{% else %}
+		<P>You got nothin'... <br>loser.</P>
+	{% endif %}
+<a href="{% url 'scheduler:events'%}">Back to your events</a>
 {% endblock %}

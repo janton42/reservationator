@@ -8,5 +8,6 @@
 	<form action="" method="POST">
 		{% csrf_token %}
 		<input type="submit" value="Yes, delete.">
+		<button><a href="{% url 'scheduler:events' %}">Cancel</a></button>
 	</form>
 {% endblock %}

@@ -13,7 +13,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 
 def index(request):
-
+	
 	return render(request, 'scheduler/index.html')
 
 def vote(request, event_id):
@@ -65,6 +65,11 @@ class EventDelete(LoginRequiredMixin, DeleteView):
 	model = Event
 	success_url = '/scheduler/events'
 
+class EventUpdate(LoginRequiredMixin, UpdateView):
+	model = Event
+	fields = ['name', 'place']
+	success_url = '/scheduler/events'
+
 class ChoiceView(generic.DetailView,LoginRequiredMixin):
 	model = Choice
 	template_name = 'scheduler/date.html'
@@ -75,4 +80,3 @@ class ChoiceView(generic.DetailView,LoginRequiredMixin):
 class DetailsView(generic.DetailView,LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/details.html'
-

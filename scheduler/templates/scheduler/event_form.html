@@ -7,5 +7,6 @@
     {{ form.as_table }}
     </table>
     <input type="submit" value="Submit">
+    <button><a href="{% url 'scheduler:events' %}">Cancel</a></button>
   </form>
 {% endblock %}

@@ -4,7 +4,7 @@
 <h1>Welcome to the Reservationator!</h1>
 	{% if user.is_authenticated %}
 		<div class="center">
-			<a href="{% url 'scheduler:events' %}">Your events</a>
+			<a href="{% url 'scheduler:events' %}">Your Hosted Events</a>
 		</div>
 	{% else %}
 		<div class="center">
