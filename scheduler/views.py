@@ -77,6 +77,11 @@ class ChoiceView(generic.DetailView,LoginRequiredMixin):
 	def get_queryset(self):
 		return Choice.objects.all()
 
+class ChoiceCreate(LoginRequiredMixin, CreateView):
+	model = Choice
+	fields = ['event', 'date']
+	success_url = '/scheduler/events'
+
 class DetailsView(generic.DetailView,LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/details.html'

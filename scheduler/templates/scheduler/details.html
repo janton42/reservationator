@@ -16,5 +16,10 @@
 	{% else %}
 		<P>You got nothin'... <br>loser.</P>
 	{% endif %}
-<a href="{% url 'scheduler:events'%}">Back to your events</a>
+	<div class="center">
+		<a href="{% url 'scheduler:choice_create' %}">Add a Time</a>
+		<br>
+		<br>
+		<a href="{% url 'scheduler:events'%}">Back to your events</a>
+	</div>
 {% endblock %}

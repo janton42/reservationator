@@ -15,7 +15,10 @@ urlpatterns += [
 	path('events/create', views.EventCreate.as_view(), name='event_create'),
 	path('events/<int:pk>/delete', views.EventDelete.as_view(), name='event_delete'),
 	path('events/<int:pk>/update', views.EventUpdate.as_view(), name='event_update'),
+]
 
+urlpatterns += [
+	path('choices/create', views.ChoiceCreate.as_view(), name='choice_create'),
 ]
 
 urlpatterns += [
