@@ -20,6 +20,7 @@ urlpatterns += [
 urlpatterns += [
 	path('choices/create', views.ChoiceCreate.as_view(), name='choice_create'),
 	path('choices/<int:pk>/update', views.ChoiceUpdate.as_view(), name='choice_update'),
+	path('choices/<int:pk>/delete', views.ChoiceDelete.as_view(), name='choice_delete'),
 ]
 
 urlpatterns += [
