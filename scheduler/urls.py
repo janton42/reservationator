@@ -19,6 +19,7 @@ urlpatterns += [
 
 urlpatterns += [
 	path('choices/create', views.ChoiceCreate.as_view(), name='choice_create'),
+	path('choices/<int:pk>/update', views.ChoiceUpdate.as_view(), name='choice_update'),
 ]
 
 urlpatterns += [
