@@ -85,3 +85,8 @@ class ChoiceCreate(LoginRequiredMixin, CreateView):
 class DetailsView(generic.DetailView,LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/details.html'
+
+class ChoiceUpdate(LoginRequiredMixin, UpdateView):
+	model = Choice
+	fields = ['date']
+	success_url = '/scheduler/events'
