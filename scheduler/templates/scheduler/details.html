@@ -12,6 +12,8 @@
 	{% if event.choice_set %}
 		{% for choice in event.choice_set.all %}
 			<p><a href="{% url 'scheduler:choice_update' choice.id %}">{{ choice.date }}</a> -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
+			<br>
+			<a href="{% url 'scheduler:choice_delete' choice.id %}"></a>
 		{% endfor %}
 	{% else %}
 		<P>You got nothin'... <br>loser.</P>
