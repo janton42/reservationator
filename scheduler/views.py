@@ -90,3 +90,7 @@ class ChoiceUpdate(LoginRequiredMixin, UpdateView):
 	model = Choice
 	fields = ['date']
 	success_url = '/scheduler/events'
+
+class ChoiceDelete(LoginRequiredMixin, DeleteView):
+	model = Choice
+	success_url = '/scheduler/events'
