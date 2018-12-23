@@ -11,6 +11,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from scheduler.forms import RegistrationForm
 
 def index(request):
 	
@@ -32,22 +33,23 @@ def vote(request, event_id):
 
 def signup(request):
     if request.method == 'GET':
-        form = UserCreationForm()
+        form = RegistrationForm()
         return render(request, 'signup.html', {'form': form})
     elif request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password1']
-            user.set_password(password)
-            user.save()
-            login(request, user)
-            return redirect('scheduler:index')
+        	form.save()
+        	login(request, user)
+        	return redirect('scheduler:index')
 
         else:
-            form = UserCreationForm(request.POST)
+            form = RegistrationForm(request.POST)
             return render(request, 'signup.html', {'form': form})
+
+def updateUser(request):
+	if request.method == 'GET':
+		form = UserChangeForm()
+		return render(request, '')
 
 class EventCreate(LoginRequiredMixin, CreateView):
 	model = Event
