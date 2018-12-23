@@ -26,6 +26,7 @@
 	<div class="center">
 		<a href="{% url 'scheduler:index' %}">Home</a>
 		{% if user.is_authenticated %}
+			<p>Hello, {{user.first_name}}!</p>
             <a href="{% url 'logout'%}">Logout</a>   
         {% endif %}
 	</div>
