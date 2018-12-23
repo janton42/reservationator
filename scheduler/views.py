@@ -36,15 +36,14 @@ def signup(request):
         form = RegistrationForm()
         return render(request, 'signup.html', {'form': form})
     elif request.method == 'POST':
-        form = RegistrationForm(request.POST)
-        if form.is_valid():
-        	form.save()
-        	login(request, user)
-        	return redirect('scheduler:index')
-
-        else:
-            form = RegistrationForm(request.POST)
-            return render(request, 'signup.html', {'form': form})
+    	user = request.user
+    	form = RegistrationForm(request.POST)
+    	if form.is_valid():
+    		form.save()
+    		return redirect('scheduler:index')
+    	else:
+    		form = RegistrationForm(request.POST)
+    		return render(request, 'signup.html', {'form': form})
 
 def updateUser(request):
 	if request.method == 'GET':
