@@ -1,0 +1,21 @@
+{% extends 'base_generic.html' %} 
+
+{% block content %}
+
+<div class="center">
+	<p>Hello {{ user.first_name }}!</p>
+	{% if contact_list %}
+		<p>Here are your contacts:</p>
+			{% for contact in contact_list %}
+				<div class="center">
+					<p>{{ contact.first_name }} {{ contact.last_name }}</p>
+				</div>
+			{% endfor %}
+	{% else %}
+		<p>You have no friends!</p>
+	{% endif %}
+	
+
+</div>
+
+{% endblock %}

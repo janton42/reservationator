@@ -5,6 +5,8 @@
 	{% if user.is_authenticated %}
 		<div class="center">
 			<a href="{% url 'scheduler:events' %}">Your Hosted Events</a>
+			<br>
+			<a href="{% url 'scheduler:contacts' %}">Your contacts</a>
 		</div>
 	{% else %}
 		<div class="center">

@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import permission_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from scheduler.models import Event, Choice, Place
+from scheduler.models import *
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -94,3 +94,10 @@ class ChoiceUpdate(LoginRequiredMixin, UpdateView):
 class ChoiceDelete(LoginRequiredMixin, DeleteView):
 	model = Choice
 	success_url = '/scheduler/events'
+
+class ContactsListView(generic.ListView, LoginRequiredMixin):
+	model = Contact
+	template_name = 'scheduler/contacts.html'
+
+	def get_queryset(self):
+		return Contact.objects.filter(owner=self.request.user)

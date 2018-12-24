@@ -24,5 +24,9 @@ urlpatterns += [
 ]
 
 urlpatterns += [
+	path('contacts/', views.ContactsListView.as_view(), name='contacts'),
+]
+
+urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
