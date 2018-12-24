@@ -44,16 +44,6 @@ def signup(request):
     		form = RegistrationForm(request.POST)
     		return render(request, 'signup.html', {'form': form})
 
-def updateUser(request):
-	if request.method == 'GET':
-		form = UserChangeForm()
-		return render(request, '')
-
-class EventCreate(LoginRequiredMixin, CreateView):
-	model = Event
-	fields = '__all__'
-	success_url = '/scheduler/events'
-
 class EventsListView(generic.ListView, LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/events.html'
@@ -61,13 +51,18 @@ class EventsListView(generic.ListView, LoginRequiredMixin):
 	def get_queryset(self):
 		return Event.objects.filter(host=self.request.user)
 
-class EventDelete(LoginRequiredMixin, DeleteView):
-	model = Event
-	success_url = '/scheduler/events'
-
 class EventUpdate(LoginRequiredMixin, UpdateView):
 	model = Event
 	fields = ['name', 'place']
+	success_url = '/scheduler/events'
+
+class EventCreate(LoginRequiredMixin, CreateView):
+	model = Event
+	fields = '__all__'
+	success_url = '/scheduler/events'
+
+class EventDelete(LoginRequiredMixin, DeleteView):
+	model = Event
 	success_url = '/scheduler/events'
 
 class ChoiceView(generic.DetailView,LoginRequiredMixin):
@@ -77,23 +72,23 @@ class ChoiceView(generic.DetailView,LoginRequiredMixin):
 	def get_queryset(self):
 		return Choice.objects.all()
 
-class ChoiceCreate(LoginRequiredMixin, CreateView):
-	model = Choice
-	fields = ['event', 'date']
-	success_url = '/scheduler/events'
-
-class DetailsView(generic.DetailView,LoginRequiredMixin):
-	model = Event
-	template_name = 'scheduler/details.html'
-
 class ChoiceUpdate(LoginRequiredMixin, UpdateView):
 	model = Choice
 	fields = ['date']
 	success_url = '/scheduler/events'
 
+class ChoiceCreate(LoginRequiredMixin, CreateView):
+	model = Choice
+	fields = ['event', 'date']
+	success_url = '/scheduler/events'
+
 class ChoiceDelete(LoginRequiredMixin, DeleteView):
 	model = Choice
 	success_url = '/scheduler/events'
+
+class DetailsView(generic.DetailView,LoginRequiredMixin):
+	model = Event
+	template_name = 'scheduler/details.html'
 
 class ContactsListView(generic.ListView, LoginRequiredMixin):
 	model = Contact
@@ -101,3 +96,13 @@ class ContactsListView(generic.ListView, LoginRequiredMixin):
 
 	def get_queryset(self):
 		return Contact.objects.filter(owner=self.request.user)
+
+class ContactUpdate(LoginRequiredMixin, UpdateView):
+	model = Contact
+	fields = ['first_name', 'last_name', 'email']
+	success_url = '/scheduler/contacts'
+
+class ContactCreate(LoginRequiredMixin, CreateView):
+	model = Contact
+	fields = '__all__'
+	success_url = '/scheduler/contacts'

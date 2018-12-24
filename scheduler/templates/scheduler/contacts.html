@@ -8,13 +8,13 @@
 		<p>Here are your contacts:</p>
 			{% for contact in contact_list %}
 				<div class="center">
-					<p>{{ contact.first_name }} {{ contact.last_name }}</p>
+					<a href="{% url 'scheduler:contact_update' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a>
 				</div>
 			{% endfor %}
 	{% else %}
 		<p>You have no friends!</p>
 	{% endif %}
-	
+	<h1><a href="{% url 'scheduler:contact_create' %}">+</a></h1>
 
 </div>
 
