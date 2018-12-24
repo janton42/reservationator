@@ -36,7 +36,6 @@ def signup(request):
         form = RegistrationForm()
         return render(request, 'signup.html', {'form': form})
     elif request.method == 'POST':
-    	user = request.user
     	form = RegistrationForm(request.POST)
     	if form.is_valid():
     		form.save()
