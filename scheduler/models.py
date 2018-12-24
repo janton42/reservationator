@@ -15,6 +15,7 @@ class Event(models.Model):
 	host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 	name = models.CharField(max_length=400, help_text='Enter a name for your event')
 	place = models.ForeignKey('Place', on_delete=models.CASCADE, null=True)
+	created_on = models.DateField(auto_now_add=True, null=True)
 
 	class Meta:
 		ordering = ['name']
@@ -105,9 +106,21 @@ class Contact(models.Model):
 	last_name = models.CharField(max_length=50)
 	email = models.EmailField()
 	owner = models.ForeignKey(User, on_delete=models.CASCADE)
+	created_on = models.DateField(auto_now_add=True, null=True)
 
 	class Meta:
 		verbose_name_plural = 'contacts'
 
 	def __str__(self):
 		return f'{self.first_name}'
+
+class Invitation(models.Model):
+	event = models.ForeignKey('Event', on_delete=models.CASCADE)
+	invitee = models.ForeignKey('Contact', on_delete=models.CASCADE)
+	created_on = models.DateField(auto_now_add=True)
+
+	class Meta:
+		verbose_name_plural = 'invitations'
+
+	def __str__(self):
+		return f'{self.id} ({self.event.name})'
