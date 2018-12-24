@@ -1,3 +1,5 @@
+import uuid
+
 from datetime import datetime
 
 from django.db import models
@@ -8,20 +10,6 @@ from django.db.models.signals import post_save
 
 from phone_field import PhoneField
 from localflavor.us.models import USStateField
-
-
-class Profile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE)
-	phone = PhoneField(blank=True)
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-	if created:
-		Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-	instance.profile.save()
 
 class Event(models.Model):
 	host = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
@@ -109,3 +97,17 @@ class Place(models.Model):
 
 	def __str__(self):
 		return f'{self.name}'
+
+
+class Contact(models.Model):
+	uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+	first_name = models.CharField(max_length=50)
+	last_name = models.CharField(max_length=50)
+	email = models.EmailField()
+	owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	class Meta:
+		verbose_name_plural = 'contacts'
+
+	def __str__(self):
+		return f'{self.first_name}'
