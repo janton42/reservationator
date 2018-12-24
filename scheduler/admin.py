@@ -1,8 +1,23 @@
 from django.contrib import admin
 from scheduler.models import *
 
-admin.site.register(Invitation)
-admin.site.register(Contact)
-admin.site.register(Place)
-admin.site.register(Event)
-admin.site.register(Choice)
+class InvitationAdmin(admin.ModelAdmin):
+	list_display = ('id', 'event', 'invitee', 'created_on')
+
+class ContactAdmin(admin.ModelAdmin):
+	list_display = ('id','first_name', 'last_name', 'email', 'owner', 'created_on')
+
+class PlaceAdmin(admin.ModelAdmin):
+	list_display = ('id', 'city', 'pricequartile', 'cuisine')
+
+class EventAdmin(admin.ModelAdmin):
+	list_display = ('id', 'name', 'host', 'place', 'created_on')
+
+class ChoiceAdmin(admin.ModelAdmin):
+	list_display = ('id', 'date', 'votes')
+
+admin.site.register(Invitation, InvitationAdmin)
+admin.site.register(Contact, ContactAdmin)
+admin.site.register(Place, PlaceAdmin)
+admin.site.register(Event, EventAdmin)
+admin.site.register(Choice, ChoiceAdmin)
