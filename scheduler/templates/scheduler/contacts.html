@@ -8,7 +8,9 @@
 		<p>Here are your contacts:</p>
 			{% for contact in contact_list %}
 				<div class="center">
-					<a href="{% url 'scheduler:contact_update' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a>
+					<a href="{% url 'scheduler:contact_update' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a> 
+					<br>
+					<a href="{% url 'scheduler:contact_delete' contact.id %}">Delete</a>
 				</div>
 			{% endfor %}
 	{% else %}

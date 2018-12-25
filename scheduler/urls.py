@@ -27,6 +27,7 @@ urlpatterns += [
 	path('contacts/', views.ContactsListView.as_view(), name='contacts'),
 	path('contacts/create', views.ContactCreate.as_view(), name='contact_create'),
 	path('contacts/<int:pk>/update', views.ContactUpdate.as_view(), name='contact_update'),
+	path('contacts/<int:pk>/delete', views.ContactDelete.as_view(), name='contact_delete'),
 ]
 
 urlpatterns += [

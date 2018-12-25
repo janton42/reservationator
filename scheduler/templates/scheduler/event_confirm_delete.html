@@ -3,9 +3,9 @@
 {% block content %}
 	<h1>Delete Event</h1>
 
-	<p>Are you sure you want to delete the event: {{ event }}</p>
+	<p>Are you sure you want to delete the event: {{ event }}?</p>
 
-	<form action="" method="POST">
+	<form method="POST">
 		{% csrf_token %}
 		<input type="submit" value="Yes, delete.">
 		<button><a href="{% url 'scheduler:events' %}">Cancel</a></button>

@@ -106,3 +106,7 @@ class ContactCreate(LoginRequiredMixin, CreateView):
 	model = Contact
 	fields = '__all__'
 	success_url = '/scheduler/contacts'
+
+class ContactDelete(LoginRequiredMixin, DeleteView):
+	model = Contact
+	success_url = '/scheduler/contacts'
