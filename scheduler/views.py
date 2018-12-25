@@ -44,6 +44,7 @@ def signup(request):
     		form = RegistrationForm(request.POST)
     		return render(request, 'signup.html', {'form': form})
 
+# ----Event Views---------------------------------------------
 class EventsListView(generic.ListView, LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/events.html'
@@ -65,6 +66,8 @@ class EventDelete(LoginRequiredMixin, DeleteView):
 	model = Event
 	success_url = '/scheduler/events'
 
+
+# ----Choice Views---------------------------------------------
 class ChoiceView(generic.DetailView,LoginRequiredMixin):
 	model = Choice
 	template_name = 'scheduler/date.html'
@@ -86,10 +89,14 @@ class ChoiceDelete(LoginRequiredMixin, DeleteView):
 	model = Choice
 	success_url = '/scheduler/events'
 
+
+
 class DetailsView(generic.DetailView,LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/details.html'
 
+
+# ----Contact Views----------------------------------------------
 class ContactsListView(generic.ListView, LoginRequiredMixin):
 	model = Contact
 	template_name = 'scheduler/contacts.html'
@@ -110,3 +117,11 @@ class ContactCreate(LoginRequiredMixin, CreateView):
 class ContactDelete(LoginRequiredMixin, DeleteView):
 	model = Contact
 	success_url = '/scheduler/contacts'
+
+# ----Invitation Views------------------------------------------
+class InvitationsListView(generic.ListView, LoginRequiredMixin):
+	model = Invitation
+	template_name = 'scheduler/invitations.html'
+
+	def get_queryset(self):
+		return Invitation.objects.filter(invitee=self.request.user)

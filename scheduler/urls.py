@@ -31,5 +31,9 @@ urlpatterns += [
 ]
 
 urlpatterns += [
+	path('invitations/', views.InvitationsListView.as_view(), name='invitations'),
+]
+
+urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]

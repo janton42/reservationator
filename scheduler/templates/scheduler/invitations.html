@@ -1,0 +1,12 @@
+{% extends "base_generic.html"} 
+
+{% block content %}
+{% if invitation_list %}
+	{% for invitation in invitation_list %}
+		<p>{{ invitation.event }}</p>
+	{% endfor %}
+{% else %}
+	<p>You have no invitations.</p>
+{% endif %}
+
+{% endblock %}
