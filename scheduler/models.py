@@ -116,7 +116,7 @@ class Contact(models.Model):
 
 class Invitation(models.Model):
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
-	invitee = models.ForeignKey('Contact', on_delete=models.CASCADE)
+	invitee = models.ForeignKey(User, on_delete=models.CASCADE)
 	created_on = models.DateField(auto_now_add=True)
 
 	class Meta:
