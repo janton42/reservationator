@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %} 
 
 {% block content %}
+<div class="center">
 {% if invitation_list %}
 	{% for invitation in invitation_list %}
 		{% if invitation.event.host == user %}
@@ -10,8 +11,8 @@
 		{% else %}
 			<p>You have no invitations.</p>
 		{% endif %}
-
 	{% endfor %}
 {% endif %}
-
+<h1><a href="{% url 'scheduler:invitation_create' %}">+</a></h1>
+</div>
 {% endblock %}

@@ -114,3 +114,8 @@ class InvitationUpdate(LoginRequiredMixin, UpdateView):
 	model = Invitation
 	fields = ['event', 'invitee']
 	success_url = '/scheduler/invitations_sent'
+
+class InvitationCreate(LoginRequiredMixin, CreateView):
+	model = Invitation
+	fields = '__all__'
+	success_url = '/scheduler/invitations_sent'
