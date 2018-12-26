@@ -28,6 +28,7 @@ urlpatterns += [
 	path('invitations_sent/', views.InvitationsSentListView.as_view(), name='invitations_sent'),
 	path('invitation/create', views.InvitationCreate.as_view(), name='invitation_create'),
 	path('invitation/<int:pk>/update', views.InvitationUpdate.as_view(), name='invitation_update'),
+	path('invitation/<int:pk>/delete', views.InvitationDelete.as_view(), name='invitation_delete'),
 ]
 
 urlpatterns += [

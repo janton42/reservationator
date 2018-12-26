@@ -8,6 +8,8 @@
 			<p>Event: {{ invitation.event }}</p>
 			<p>Invitee: {{ invitation.invitee.first_name }} {{ invitation.invitee.last_name }}</p>
 			<a href="{% url 'scheduler:invitation_update' invitation.id %}">Make changes to this invitaton</a>
+			<br>
+			<a href="{% url 'scheduler:invitation_delete' invitation.id %}">Delete this invitation</a>
 		{% else %}
 			<p>You have no invitations.</p>
 		{% endif %}
