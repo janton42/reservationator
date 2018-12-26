@@ -8,7 +8,9 @@
 			<br>
 			<a href="{% url 'scheduler:contacts' %}">Your contacts</a>
 			<br>
-			<a href="{% url 'scheduler:invitations' %}">Your invitations</a>
+			<a href="{% url 'scheduler:invitations_received' %}">Your received invitations</a>
+			<br>
+			<a href="{% url 'scheduler:invitations_sent' %}">Your sent invitations</a>
 		</div>
 	{% else %}
 		<div class="center">

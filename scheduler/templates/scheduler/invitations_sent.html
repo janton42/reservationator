@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %} 
+
+{% block content %}
+{% if invitation_list %}
+	{% for invitation in invitation_list %}
+		{% if invitation.event.host == user %}
+			<p>Event: {{ invitation.event }}</p>
+			<p>Invitee: {{ invitation.invitee.first_name }} {{ invitation.invitee.last_name }}</p>
+		{% else %}
+			<p>You have no invitations.</p>
+		{% endif %}
+
+	{% endfor %}
+{% endif %}
+
+{% endblock %}

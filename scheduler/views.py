@@ -119,9 +119,16 @@ class ContactDelete(LoginRequiredMixin, DeleteView):
 	success_url = '/scheduler/contacts'
 
 # ----Invitation Views------------------------------------------
-class InvitationsListView(generic.ListView, LoginRequiredMixin):
+class InvitationsReceivedListView(generic.ListView, LoginRequiredMixin):
 	model = Invitation
-	template_name = 'scheduler/invitations.html'
+	template_name = 'scheduler/invitations_received.html'
 
 	def get_queryset(self):
 		return Invitation.objects.filter(invitee=self.request.user)
+
+class InvitationsSentListView(generic.ListView, LoginRequiredMixin):
+	model = Invitation
+	template_name = 'scheduler/invitations_sent.html'
+
+	def get_queryset(self):
+		return Invitation.objects.all()
