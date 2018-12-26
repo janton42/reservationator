@@ -4,9 +4,6 @@ from scheduler.models import *
 class InvitationAdmin(admin.ModelAdmin):
 	list_display = ('id', 'event', 'invitee', 'created_on')
 
-class ContactAdmin(admin.ModelAdmin):
-	list_display = ('id','first_name', 'last_name', 'email', 'owner', 'created_on')
-
 class PlaceAdmin(admin.ModelAdmin):
 	list_display = ('id', 'city', 'pricequartile', 'cuisine')
 
@@ -17,7 +14,6 @@ class ChoiceAdmin(admin.ModelAdmin):
 	list_display = ('id', 'date', 'votes')
 
 admin.site.register(Invitation, InvitationAdmin)
-admin.site.register(Contact, ContactAdmin)
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Choice, ChoiceAdmin)

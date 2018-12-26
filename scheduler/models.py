@@ -100,19 +100,6 @@ class Place(models.Model):
 		return f'{self.name}'
 
 
-class Contact(models.Model):
-	uuid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-	first_name = models.CharField(max_length=50)
-	last_name = models.CharField(max_length=50)
-	email = models.EmailField()
-	owner = models.ForeignKey(User, on_delete=models.CASCADE)
-	created_on = models.DateField(auto_now_add=True, null=True)
-
-	class Meta:
-		verbose_name_plural = 'contacts'
-
-	def __str__(self):
-		return f'{self.first_name}'
 
 class Invitation(models.Model):
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)

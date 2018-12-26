@@ -95,29 +95,6 @@ class DetailsView(generic.DetailView,LoginRequiredMixin):
 	model = Event
 	template_name = 'scheduler/details.html'
 
-
-# ----Contact Views----------------------------------------------
-class ContactsListView(generic.ListView, LoginRequiredMixin):
-	model = Contact
-	template_name = 'scheduler/contacts.html'
-
-	def get_queryset(self):
-		return Contact.objects.filter(owner=self.request.user)
-
-class ContactUpdate(LoginRequiredMixin, UpdateView):
-	model = Contact
-	fields = ['first_name', 'last_name', 'email']
-	success_url = '/scheduler/contacts'
-
-class ContactCreate(LoginRequiredMixin, CreateView):
-	model = Contact
-	fields = '__all__'
-	success_url = '/scheduler/contacts'
-
-class ContactDelete(LoginRequiredMixin, DeleteView):
-	model = Contact
-	success_url = '/scheduler/contacts'
-
 # ----Invitation Views------------------------------------------
 class InvitationsReceivedListView(generic.ListView, LoginRequiredMixin):
 	model = Invitation
