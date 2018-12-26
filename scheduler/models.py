@@ -99,8 +99,6 @@ class Place(models.Model):
 	def __str__(self):
 		return f'{self.name}'
 
-
-
 class Invitation(models.Model):
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
 	invitee = models.ForeignKey(User, on_delete=models.CASCADE)

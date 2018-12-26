@@ -3,7 +3,9 @@
 {% block content %}
 {% if invitation_list %}
 	{% for invitation in invitation_list %}
-		<p>{{ invitation.event }}</p>
+		<p>Event: {{ invitation.event }}</p>
+		<p>Host: {{ invitation.event.host.first_name }} {{ invitation.event.host.last_name }}</p>
+		<p>Place: {{ invitation.event.place }}</p>
 	{% endfor %}
 {% else %}
 	<p>You have no invitations.</p>

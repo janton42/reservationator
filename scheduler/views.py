@@ -109,3 +109,8 @@ class InvitationsSentListView(generic.ListView, LoginRequiredMixin):
 
 	def get_queryset(self):
 		return Invitation.objects.all()
+
+class InvitationUpdate(LoginRequiredMixin, UpdateView):
+	model = Invitation
+	fields = ['event', 'invitee']
+	success_url = '/scheduler/invitations_sent'

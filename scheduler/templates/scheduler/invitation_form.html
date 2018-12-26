@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %} 
+
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit">
+    <button><a href="{% url 'scheduler:invitations_sent' %}">Cancel</a></button>
+  </form>
+{% endblock %}
