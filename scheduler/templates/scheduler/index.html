@@ -1,7 +1,6 @@
 {% extends "base_generic.html" %} 
 
 {% block content %}
-<h1>Welcome to the Reservationator!</h1>
 	{% if user.is_authenticated %}
 		<div class="center">
 			<a href="{% url 'scheduler:events' %}">Your Hosted Events</a>
@@ -12,7 +11,11 @@
 		</div>
 	{% else %}
 		<div class="center">
-			<a href="{% url 'scheduler:login' %}">Login</a>
+			<button><a href="{% url 'scheduler:login' %}">Sign in</a></button>
+			<br>
+			<br>
+			<button><a href="{% url 'signup' %}">Sign up</a></button>
 		</div>
+
 	{% endif %}
 {% endblock %}
