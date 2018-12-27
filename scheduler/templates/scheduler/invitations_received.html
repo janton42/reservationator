@@ -3,12 +3,24 @@
 {% block content %}
 {% if invitation_list %}
 	{% for invitation in invitation_list %}
-		<p>Event: {{ invitation.event }}</p>
-		<p>Host: {{ invitation.event.host.first_name }} {{ invitation.event.host.last_name }}</p>
-		<p>Place: {{ invitation.event.place }}</p>
+		<div class="center">
+			<p>Event: {{ invitation.event }}</p>
+			<p>Host: {{ invitation.event.host.first_name }} {{ invitation.event.host.last_name }}</p>
+			<p>Place: {{ invitation.event.place }}</p>
+			<form action="{% url 'scheduler:vote' invitation.event.id %}" method="post">
+				{% csrf_token %}
+				{% for choice in invitation.event.choice_set.all %}
+					<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"> {{ choice.date }}
+					<label for="choice{{ forloop.counter }}"></label>
+					<br>
+				{% endfor %} 
+				<input type="submit" value="Vote"> 
+			</form>
+		</div>
 	{% endfor %}
 {% else %}
 	<p>You have no invitations.</p>
 {% endif %}
 
 {% endblock %}
+
