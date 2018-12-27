@@ -1,13 +1,6 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<script type="text/javascript" src="/media/jquery/js/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="/media/jquery/js/jquery-ui-1.8.18.custom.min.js"></script>
-<script>
-$(function() {
-  $( "#id_choice_form_date" ).datepicker();
-});
-</script>
 
   <form action="" method="post">
     {% csrf_token %}
