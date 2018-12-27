@@ -13,7 +13,11 @@ class EventAdmin(admin.ModelAdmin):
 class ChoiceAdmin(admin.ModelAdmin):
 	list_display = ('id', 'date', 'votes')
 
+class VoterAdmin(admin.ModelAdmin):
+	list_display = ('id', 'user', 'event', 'created_on')
+
 admin.site.register(Invitation, InvitationAdmin)
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(Choice, ChoiceAdmin)
+admin.site.register(Voter, VoterAdmin)
