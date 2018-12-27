@@ -6,14 +6,12 @@
 				<div class="center">
 					<a href="{% url 'scheduler:details' event.id %}">{{ event.name }}</a>
 					<br>
-					<br>
 					<a href="{% url 'scheduler:event_delete' event.id %}">Delete Event</a>
-					<br>
 					<br>
 					<a href="{% url 'scheduler:event_update' event.id %}">Change Name or Place of Event</a>
 					<br>
 					<br>
-					<br>
+					{{ event.invitee.first_name }}
 				</div>
 			<br>
 			{% endfor %}

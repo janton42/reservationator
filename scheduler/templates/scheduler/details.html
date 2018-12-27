@@ -9,17 +9,23 @@
 </div>
 <p>{{ event.place.get_pricequartile_display }}</p>
 
-	{% if event.choice_set %}
-		{% for choice in event.choice_set.all %}
+	{% for choice in event.choice_set.all %}
+		<div class="center">
 			<p><a href="{% url 'scheduler:choice_update' choice.id %}">{{ choice.date }}</a> -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
-			<br>
 			<a href="{% url 'scheduler:choice_delete' choice.id %}">Delete Time</a>
-		{% endfor %}
-	{% else %}
-		<P>You got nothin'... <br>loser.</P>
-	{% endif %}
+		</div>
+		<br>
+	{% endfor %}
+
+	{% for invitation in event.invitation_set.all %}
+		<div class="center">
+			<p>{{ invitation.invitee.first_name }} {{ invitation.invitee.last_name }}</p>
+		</div>
+	{% endfor %}
+	
 	<div class="center">
-		<a href="{% url 'scheduler:choice_create' %}">Add a Time</a>
+		<a href="{% url 'scheduler:invitation_create' %}">Invite a friend</a>
+		<h1><a href="{% url 'scheduler:choice_create' %}">+</a></h1>
 		<br>
 		<br>
 		<a href="{% url 'scheduler:events'%}">Back to your events</a>
