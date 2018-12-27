@@ -17,6 +17,9 @@
 		<br>
 	{% endfor %}
 
+<p>Add a time</p>
+<h1><a href="{% url 'scheduler:choice_create' %}">+</a></h1>
+
 	{% for invitation in event.invitation_set.all %}
 		<div class="center">
 			<p>{{ invitation.invitee.first_name }} {{ invitation.invitee.last_name }}</p>
@@ -24,9 +27,8 @@
 	{% endfor %}
 	
 	<div class="center">
-		<a href="{% url 'scheduler:invitation_create' %}">Invite a friend</a>
-		<h1><a href="{% url 'scheduler:choice_create' %}">+</a></h1>
-		<br>
+		<p>Invite a friend</p>
+		<h1><a href="{% url 'scheduler:invitation_create' %}">+</a></h1>
 		<br>
 		<a href="{% url 'scheduler:events'%}">Back to your events</a>
 	</div>

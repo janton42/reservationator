@@ -122,4 +122,4 @@ class InvitationCreate(LoginRequiredMixin, CreateView):
 
 class InvitationDelete(LoginRequiredMixin, DeleteView):
 	model = Invitation
-	success_url = '/scheduler/invitations_sent'
+	success_url = '/scheduler/events'
