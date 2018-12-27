@@ -19,17 +19,24 @@ def index(request):
 
 def vote(request, event_id):
 	event = get_object_or_404(Event, pk=event_id)
+	if Voter.objects.filter(event_id=event_id, user_id=request.user.id).exists():
+		return render(request, 'scheduler/warning.html', {
+			'event': event,
+			'error_message': "You've already voted."
+			})
 	try:
 		selected_choice = event.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
-		return render(request, 'scheduler/date.html', {
-			'event': event,
-			'error_message': "Please choose at least one date.",
-		})
+		return render(request, 'scheduler/warning.html', {
+			'event': e,
+			'error_message': "you didn't vote."
+			})
 	else:
 		selected_choice.votes += 1
 		selected_choice.save()
-		return HttpResponseRedirect(reverse('scheduler:details', args=(event_id,)))
+		v = Voter(user=request.user, event=event)
+		v.save()
+		return HttpResponseRedirect(reverse('scheduler:invitations_received'))
 
 def signup(request):
     if request.method == 'GET':
@@ -122,4 +129,4 @@ class InvitationCreate(LoginRequiredMixin, CreateView):
 
 class InvitationDelete(LoginRequiredMixin, DeleteView):
 	model = Invitation
-	success_url = '/scheduler/events'
+	success_url = '/scheduler/invitations_sent'

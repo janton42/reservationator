@@ -34,6 +34,11 @@ class Choice(models.Model):
 	def __str__(self):
 		return f'{self.id} ({self.event.name})'
 
+class Voter(models.Model):
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
+	event = models.ForeignKey('Event', on_delete=models.CASCADE)
+	created_on = models.DateField(auto_now_add=True)
+
 class Place(models.Model):
 	name = models.CharField(max_length=400, blank=False, help_text='Enter a place name')
 	street = models.CharField(max_length=400, blank=False, help_text='Enter the street and number')
