@@ -29,21 +29,22 @@
 
 		<header>
 			<h1>Eat With Friends</h1>
-		</header>
-
-		<div class="container-fluid center">
-			<img src="{% static 'images/logo.png' %}">
-			{% block content %}
-			{% endblock %}
-		</div>
-
-		<footer>
+			<div class="center">
+				<img src="{% static 'images/logo.png' %}">
+			</div>
+			<nav>
 			{% if user.is_authenticated %}
 				<p>Hello, {{user.first_name}} ({{user}})!</p>
 		        <a href="{% url 'logout'%}">Logout</a>
 		        <a href="{% url 'scheduler:index' %}">Home</a>
 		    {% endif %}
-		</footer>
+			</nav>
+		</header>
+
+		<div class="container-fluid center">
+			{% block content %}
+			{% endblock %}
+		</div>
 	
 	</body>
 
