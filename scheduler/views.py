@@ -152,10 +152,24 @@ class InvitationUpdate(LoginRequiredMixin, UpdateView):
 	fields = ['event', 'invitee']
 	success_url = '/scheduler/invitations_sent'
 
-class InvitationCreate(LoginRequiredMixin, CreateView):
-	model = Invitation
-	fields = '__all__'
-	success_url = '/scheduler/invitations_sent'
+# class InvitationCreate(LoginRequiredMixin, CreateView):
+# 	model = Invitation
+# 	fields = '__all__'
+# 	success_url = '/scheduler/invitations_sent'
+
+@login_required
+def invitation_create(request, event_id):
+	event = get_object_or_404(Event, pk=event_id)
+	if request.method == 'POST':
+		form = InvitationCreationForm(request.POST)
+		if form.is_valid():
+			invitation_create = form.save(commit=False)
+			invitation_create.event = event
+			invitation_create.save()
+			return redirect('scheduler:invitations_sent')
+	else:
+		form = InvitationCreationForm()
+	return render(request, 'scheduler/invitation_form.html', {'form':form})	
 
 class InvitationDelete(LoginRequiredMixin, DeleteView):
 	model = Invitation

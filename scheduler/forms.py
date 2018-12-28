@@ -45,3 +45,10 @@ class EventCreationForm(forms.ModelForm):
 			'name',
 			'place',
 			)
+
+class InvitationCreationForm(forms.ModelForm):
+	class Meta:
+		model = Invitation
+		fields = (
+			'invitee',
+			)
