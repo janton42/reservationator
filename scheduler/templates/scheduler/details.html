@@ -1,36 +1,41 @@
 {% extends "base_generic.html" %} 
 
 {% block content %}
-
-<h1>{{ event.name }}</h1>
-<p> - @ - </p>
-<h3>{{ event.place }}</h3>
-<div class="center">
-	<h4>The finest {{ event.place.get_cuisine_display }} restaurant in all the land.</h4>
-</div>
-<p>{{ event.place.get_pricequartile_display }}</p>
-
-	{% for choice in event.choice_set.all %}
-		<div class="center">
-			<p><a href="{% url 'scheduler:choice_update' choice.id %}">{{ choice.date }} @ {{ choice.time }}</a> -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
-			<a href="{% url 'scheduler:choice_delete' choice.id %}">Delete Time</a>
-		</div>
-		<br>
-	{% endfor %}
-
-<p>Add a time</p>
-<h1><a href="{% url 'scheduler:choice_create' event.id %}">+</a></h1>
-
-	{% for invitation in event.invitation_set.all %}
-		<div class="center">
-			<p>{{ invitation.invitee.first_name }} {{ invitation.invitee.last_name }}</p>
-		</div>
-	{% endfor %}
-	
+{% if user == event.host %}
+	<h1>{{ event.name }}</h1>
+	<p> - @ - </p>
+	<h3>{{ event.place }}</h3>
 	<div class="center">
-		<p>Invite a friend</p>
-		<h1><a href="{% url 'scheduler:invitation_create' event.id %}">+</a></h1>
-		<br>
-		<a href="{% url 'scheduler:events'%}">Back to your events</a>
+		<h4>The finest {{ event.place.get_cuisine_display }} restaurant in all the land.</h4>
 	</div>
+	<p>{{ event.place.get_pricequartile_display }}</p>
+
+		{% for choice in event.choice_set.all %}
+			<div class="center">
+				<p><a href="{% url 'scheduler:choice_update' choice.id %}">{{ choice.date }} @ {{ choice.time }}</a> -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
+				<a href="{% url 'scheduler:choice_delete' choice.id %}">Delete Time</a>
+			</div>
+			<br>
+		{% endfor %}
+
+	<p>Add a time</p>
+	<h1><a href="{% url 'scheduler:choice_create' event.id %}">+</a></h1>
+
+		{% for invitation in event.invitation_set.all %}
+			<div class="center">
+				<p>{{ invitation.invitee.first_name }} {{ invitation.invitee.last_name }}</p>
+			</div>
+		{% endfor %}
+		
+		<div class="center">
+			<p>Invite a friend</p>
+			<h1><a href="{% url 'scheduler:invitation_create' event.id %}">+</a></h1>
+			<br>
+			<a href="{% url 'scheduler:events'%}">Back to your events</a>
+		</div>
+{% else %}
+	<div class="center">
+		<p>You don't have access to this page.</p>
+	</div>
+{% endif %}
 {% endblock %}

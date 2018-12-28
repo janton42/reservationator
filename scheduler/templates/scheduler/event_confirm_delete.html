@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %} 
 
 {% block content %}
+{% if user == event.host %}
 	<h1>Delete Event</h1>
 
 	<p>Are you sure you want to delete the event: {{ event }}?</p>
@@ -10,4 +11,9 @@
 		<input type="submit" value="Yes, delete.">
 		<button><a href="{% url 'scheduler:events' %}">Cancel</a></button>
 	</form>
+{% else %}
+	<div class="center">
+		<p>You don't have access to this page.</p>
+	</div>
+{% endif %}
 {% endblock %}
