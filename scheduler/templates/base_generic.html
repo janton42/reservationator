@@ -9,10 +9,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-	<link type="text/css" href="/media/jquery/css/smoothness/jquery-ui-1.8.18.custom.css" rel="Stylesheet" />
+	<script
+	src="https://code.jquery.com/jquery-3.3.1.js"
+	integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+	crossorigin="anonymous"></script>
+
+	<script
+	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+	integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+	crossorigin="anonymous"></script>
 
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<script type="text/javascript" src="{% static 'scripts/jquery.js' %}"></script>
 
 </head>
 <body>
@@ -26,6 +35,8 @@
 		{% endblock %}
 	</div>
 
+</body>
+
 <footer>
 	<div class="center">
 		<a href="{% url 'scheduler:index' %}">Home</a>
@@ -35,6 +46,4 @@
         {% endif %}
 	</div>
 </footer>
-
-</body>
 </html>

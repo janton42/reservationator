@@ -5,7 +5,6 @@ from . import views
 app_name = 'scheduler'
 urlpatterns = [
 	path('', views.index, name='index'),
-	path('<int:pk>', views.ChoiceView.as_view(), name='date'),
 	path('<int:pk>/details/', views.DetailsView.as_view(), name='details'),
 	path('<int:event_id>/vote/', views.vote, name='vote'),
 ]
@@ -18,7 +17,8 @@ urlpatterns += [
 ]
 
 urlpatterns += [
-	path('choices/create', views.ChoiceCreate.as_view(), name='choice_create'),
+	path('<int:pk>', views.ChoiceView.as_view(), name='date'),
+	path('choices/<int:event_id>/create', views.choice_create, name='choice_create'),
 	path('choices/<int:pk>/update', views.ChoiceUpdate.as_view(), name='choice_update'),
 	path('choices/<int:pk>/delete', views.ChoiceDelete.as_view(), name='choice_delete'),
 ]

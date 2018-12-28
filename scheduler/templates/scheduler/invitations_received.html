@@ -10,7 +10,7 @@
 			<form action="{% url 'scheduler:vote' invitation.event.id %}" method="post">
 				{% csrf_token %}
 				{% for choice in invitation.event.choice_set.all %}
-					<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"> {{ choice.date }}
+					<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"> {{ choice.date }} @ {{ choice.time }}
 					<label for="choice{{ forloop.counter }}"></label>
 					<br>
 				{% endfor %} 

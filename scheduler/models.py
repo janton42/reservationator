@@ -25,7 +25,8 @@ class Event(models.Model):
 
 class Choice(models.Model):
 	event = models.ForeignKey('Event', on_delete=models.CASCADE)
-	date = models.DateTimeField('time and date', null=True)
+	date = models.DateField('Date',blank=False, default='2018-12-26')
+	time = models.TimeField('Time',blank=False, default='17:00')
 	votes = models.IntegerField(default=0)
 
 	class Meta:

@@ -11,14 +11,14 @@
 
 	{% for choice in event.choice_set.all %}
 		<div class="center">
-			<p><a href="{% url 'scheduler:choice_update' choice.id %}">{{ choice.date }}</a> -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
+			<p><a href="{% url 'scheduler:choice_update' choice.id %}">{{ choice.date }} @ {{ choice.time }}</a> -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</p>
 			<a href="{% url 'scheduler:choice_delete' choice.id %}">Delete Time</a>
 		</div>
 		<br>
 	{% endfor %}
 
 <p>Add a time</p>
-<h1><a href="{% url 'scheduler:choice_create' %}">+</a></h1>
+<h1><a href="{% url 'scheduler:choice_create' event.id %}">+</a></h1>
 
 	{% for invitation in event.invitation_set.all %}
 		<div class="center">

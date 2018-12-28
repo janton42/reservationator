@@ -10,13 +10,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from scheduler.forms import RegistrationForm
+from scheduler.forms import *
+from django import forms
 
 def index(request):
 	
 	return render(request, 'scheduler/index.html')
 
+@login_required
 def vote(request, event_id):
 	event = get_object_or_404(Event, pk=event_id)
 	if Voter.objects.filter(event_id=event_id, user_id=request.user.id).exists():
@@ -28,7 +31,7 @@ def vote(request, event_id):
 		selected_choice = event.choice_set.get(pk=request.POST['choice'])
 	except (KeyError, Choice.DoesNotExist):
 		return render(request, 'scheduler/warning.html', {
-			'event': e,
+			'event': event,
 			'error_message': "you didn't vote."
 			})
 	else:
@@ -87,10 +90,24 @@ class ChoiceUpdate(LoginRequiredMixin, UpdateView):
 	fields = ['date']
 	success_url = '/scheduler/events'
 
-class ChoiceCreate(LoginRequiredMixin, CreateView):
-	model = Choice
-	fields = ['event', 'date']
-	success_url = '/scheduler/events'
+# class ChoiceCreate(LoginRequiredMixin, CreateView):
+# 	model = Choice
+# 	fields = ['event', 'date', 'time']
+# 	success_url = '/scheduler/events'
+
+@login_required
+def choice_create(request, event_id):
+	event = get_object_or_404(Event, pk=event_id)
+	if request.method == 'POST':
+		form = ChoiceCreationForm(request.POST)
+		if form.is_valid():
+			choice_create = form.save(commit=False)
+			choice_create.event = event
+			choice_create.save()
+			return redirect('scheduler:events')
+	else:
+		form = ChoiceCreationForm()
+	return render(request, 'scheduler/choice_form.html', {'form': form})
 
 class ChoiceDelete(LoginRequiredMixin, DeleteView):
 	model = Choice
