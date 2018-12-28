@@ -37,3 +37,11 @@ class ChoiceCreationForm(forms.ModelForm):
 			'time',
 			)
 		widgets = {'date': forms.DateInput(attrs={'class': 'datepicker'})}
+
+class EventCreationForm(forms.ModelForm):
+	class Meta:
+		model = Event
+		fields = (
+			'name',
+			'place',
+			)

@@ -67,10 +67,23 @@ class EventUpdate(LoginRequiredMixin, UpdateView):
 	fields = ['name', 'place']
 	success_url = '/scheduler/events'
 
-class EventCreate(LoginRequiredMixin, CreateView):
-	model = Event
-	fields = '__all__'
-	success_url = '/scheduler/events'
+# class EventCreate(LoginRequiredMixin, CreateView):
+# 	model = Event
+# 	fields = '__all__'
+# 	success_url = '/scheduler/events'
+
+@login_required
+def event_create(request):
+	if request.method == 'POST':
+		form = EventCreationForm(request.POST)
+		if form.is_valid():
+			event_create = form.save(commit=False)
+			event_create.host = request.user
+			event_create.save()
+			return redirect('scheduler:events')
+	else:
+		form = EventCreationForm()
+	return render(request, 'scheduler/event_form.html', {'form': form})
 
 class EventDelete(LoginRequiredMixin, DeleteView):
 	model = Event
