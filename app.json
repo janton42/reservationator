@@ -1,0 +1,7 @@
+{
+	"name": "Reservationator",
+	"description": "An automated way to make reservations with friends.",
+	"repository": "https://github.com/janton42/reservationator",
+	"keywords": ["python", "django"],
+	"addons": ["heroku-postgresql"]
+} 
